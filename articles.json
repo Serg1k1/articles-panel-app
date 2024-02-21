@@ -1,0 +1,32 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "image": "https://images.ctfassets.net/pdf29us7flmy/hjhhSuDSWZ5KjrMYTijB0/8c12318f2ee0f1ab8859a90ffc0e15c6/-IND-004-075-_APA_Headings__Formatting_Tips_and_Examples_Final.png",
+      "description": "Some description about article",
+      "title": "Cats",
+      "author": "Conan Doile"
+    },
+    {
+      "id": 2,
+      "image": "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg",
+      "description": "Some description about article",
+      "title": "Dogs",
+      "author": "Conan Doile"
+    },
+    {
+      "id": 3,
+      "image": "https://th-thumbnailer.cdn-si-edu.com/bgmkh2ypz03IkiRR50I-UMaqUQc=/1000x750/filters:no_upscale():focal(1061x707:1062x708)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg",
+      "description": "Some description about article",
+      "title": "All about cats",
+      "author": "Conan Doile"
+    },
+    {
+      "id": 4,
+      "image": "https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg",
+      "description": "Some description about article",
+      "title": "Sobaka",
+      "author": "Conan Doile"
+    }
+  ]
+}
