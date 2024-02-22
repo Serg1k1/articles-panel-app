@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 import './header.scss'
 
 const Header = () => {
@@ -5,8 +7,12 @@ const Header = () => {
         <header className="header menu">
             <nav className="menu__body">
                 <ul className="menu__list">
-                    <li className="menu__item"><a href="#" className="menu__link">Admin panel</a></li>
-                    <li className="menu__item"><a href="#" className="menu__link">Current news</a></li>
+                    <li className="menu__item">
+                        <NavLink exact to="/" className="menu__link" activeStyle={{ 'color': '#9f0013' }}>Admin panel</NavLink>
+                    </li>
+                    <li className="menu__item">
+                        <NavLink to="/news" className="menu__link" activeStyle={{ 'color': '#9f0013' }}>Current news</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

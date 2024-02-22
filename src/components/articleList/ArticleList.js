@@ -17,12 +17,11 @@ const ArticleList = () => {
     } = useGetArticlesQuery();
 
     const term = useSelector(state => state.search.searchTerm);
-
     const onPinnedItem = (id) => {
-        if (pinnedItem.length !== 0) {
-            setPinnedItem([]);
-        }
         setPinnedItem([id])
+        if (pinnedItem.length !== 0 && pinnedItem[0] === id) {
+            setPinnedItem([])
+        }
     }
 
     const filteredData = (elements, term, pin) => {
@@ -38,7 +37,7 @@ const ArticleList = () => {
         }
 
         return elements.filter((item) => {
-            return (item.title.toLowerCase().indexOf(term) > -1 || item.description.toLowerCase().indexOf(term) > -1);
+            return (item.title.indexOf(term) > -1 || item.description.indexOf(term) > -1);
         })
     }
 
@@ -50,7 +49,7 @@ const ArticleList = () => {
         return <h5>Loading Erorr...</h5>
     }
 
-    const renderItems = (arr) => {
+    const renderItems = (arr, pinned) => {
         if (arr.length === 0) {
             <CSSTransition timeout={500} classNames="item">
                 return <h5>There are no any news</h5>
@@ -58,6 +57,12 @@ const ArticleList = () => {
         }
 
         return arr.map((item) => {
+
+            let clazz = 'btn btn-primary me-2';
+            if (item.id === pinned[0]) {
+                clazz += ' btn-pinned';
+            }
+
             return (
                 <CSSTransition key={item.id} timeout={500} classNames="item">
                     <div className="article-item card">
@@ -70,7 +75,7 @@ const ArticleList = () => {
                             <li className="list-group-item">{item.author}</li>
                         </ul>
                         <div className="card-body">
-                            <button onClick={() => onPinnedItem(item.id)} className="btn btn-primary me-2">Pin article</button>
+                            <button onClick={() => onPinnedItem(item.id)} className={clazz} >{item.id === pinned[0] ? "Unpin article" : "Pin article"}</button>
                             <button onClick={() => deleteArticle(item.id)} className="btn btn-secondary">Delete article</button>
                         </div>
                     </div>
@@ -81,7 +86,7 @@ const ArticleList = () => {
 
     const filteredArticles = filteredData(articles, term, pinnedItem);
 
-    const elements = renderItems(filteredArticles);
+    const elements = renderItems(filteredArticles, pinnedItem);
 
     return (
         <TransitionGroup className="article-items">
