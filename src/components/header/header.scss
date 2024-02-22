@@ -1,0 +1,21 @@
+.menu {
+    padding: 40px 0;
+    &__list {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        justify-content: end;
+    }
+    &__item {    
+    }
+    &__link {
+        text-decoration: none;
+        color: #000;
+        font-size: 30px;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #7c2020;
+        }
+    }
+}

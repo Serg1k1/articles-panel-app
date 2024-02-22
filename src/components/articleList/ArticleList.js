@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGetArticlesQuery, useDeleteArticleMutation } from '../api/articleApiSlice';
 import { useSelector } from 'react-redux';
+import { CSSTransition, TransitionGroup, } from 'react-transition-group';
 
 import Spinner from '../spinner/Spinner';
 
@@ -50,22 +51,30 @@ const ArticleList = () => {
     }
 
     const renderItems = (arr) => {
+        if (arr.length === 0) {
+            <CSSTransition timeout={500} classNames="item">
+                return <h5>There are no any news</h5>
+            </CSSTransition>
+        }
+
         return arr.map((item) => {
             return (
-                <div key={item.id} className="article-item card">
-                    <img src={item.image} className="card-img-top" alt={item.title} />
-                    <div className="card-body">
-                        <h5 className="card-title">{item.title}</h5>
-                        <p className="card-text">{item.description}</p>
+                <CSSTransition key={item.id} timeout={500} classNames="item">
+                    <div className="article-item card">
+                        <img src={item.image} className="card-img-top" alt={item.title} />
+                        <div className="card-body">
+                            <h5 className="card-title">{item.title}</h5>
+                            <p className="card-text">{item.description}</p>
+                        </div>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">{item.author}</li>
+                        </ul>
+                        <div className="card-body">
+                            <button onClick={() => onPinnedItem(item.id)} className="btn btn-primary me-2">Pin article</button>
+                            <button onClick={() => deleteArticle(item.id)} className="btn btn-secondary">Delete article</button>
+                        </div>
                     </div>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">{item.author}</li>
-                    </ul>
-                    <div className="card-body">
-                        <button onClick={() => onPinnedItem(item.id)} className="btn btn-primary me-2">Pin article</button>
-                        <button onClick={() => deleteArticle(item.id)} className="btn btn-secondary">Delete article</button>
-                    </div>
-                </div>
+                </CSSTransition>
             );
         })
     }
@@ -75,9 +84,9 @@ const ArticleList = () => {
     const elements = renderItems(filteredArticles);
 
     return (
-        <div className="article-items">
+        <TransitionGroup className="article-items">
             {elements}
-        </div>
+        </TransitionGroup>
     )
 }
 
